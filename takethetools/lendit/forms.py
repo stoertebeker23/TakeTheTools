@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Submit, Field, Fieldset
 
-from .models import Purpose, Tool, CustomImage
+from .models import Purpose, Tool, CustomImage, Note
 
 class UserRegistrationForm(forms.Form):
     username = forms.CharField(max_length=100,label='Nutzerin')
@@ -146,4 +146,22 @@ class ExportSelectionForm(forms.Form):
             print(self[field_name].value)
             yield self[field_name]
 
+
+class NoteForm(forms.ModelForm):
+
+    class Meta:
+        model = Note
+        fields = (
+            'title',
+            'text',
+            'prio',
+            'author'
+        )
+
+        labels = {
+            'title': 'Titel',
+            'text': 'Notiz',
+            'prio': 'Priorität',
+            'author': 'Benutzerin'
+        }
 
